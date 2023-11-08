@@ -3,8 +3,17 @@ import { Tabs, Tab, Card, CardBody } from '@nextui-org/react'
 export default function App() {
   return (
     <div className="flex w-full flex-col">
-      <Tabs aria-label="Options">
-        <Tab key="photos" title="Photos">
+      <Tabs
+        // fullWidth
+        aria-label="Options"
+        classNames={{
+          cursor: 'dark:bg-sunset rounded-3xl',
+          tab: 'h-full p-5',
+          tabList: 'rounded-[2rem]',
+          tabContent: 'group-data-[selected=true]:text-obsidian font-bold',
+        }}
+      >
+        <Tab key="pomodoro" title="pomodoro">
           <Card>
             <CardBody>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do

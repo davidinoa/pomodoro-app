@@ -31,6 +31,14 @@ export default {
   plugins: [
     nextui({
       defaultTheme: 'dark',
+      defaultExtendTheme: 'dark',
+      themes: {
+        dark: {
+          colors: {
+            background: '235 35% 18%',
+          },
+        },
+      },
     }),
   ],
 }

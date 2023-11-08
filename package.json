@@ -14,7 +14,8 @@
     "framer-motion": "^10.16.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "tailwindcss": "^3.3.5"
+    "tailwindcss": "^3.3.5",
+    "usehooks-ts": "^2.9.1"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",
