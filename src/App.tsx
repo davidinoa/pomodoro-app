@@ -8,7 +8,9 @@ export default function App() {
       <h2 className="font-serif text-whisper">This is Roboto Slab</h2>
       <h3 className="font-mono text-orchid">This is Space Mono</h3>
       <Tabs />
-      <CountdownTimer />
+      <div className="flex flex-col items-center justify-center">
+        <CountdownTimer />
+      </div>
     </div>
   )
 }

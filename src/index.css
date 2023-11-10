@@ -3,3 +3,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.circular-progress circle:first-of-type {
+  r: 14.5;
+}
