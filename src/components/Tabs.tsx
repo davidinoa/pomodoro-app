@@ -1,4 +1,4 @@
-import { Tabs, Tab, Card, CardBody } from '@nextui-org/react'
+import { Tabs, Tab } from '@nextui-org/react'
 import CountdownTimer from './CountdownTimer'
 
 export default function App() {

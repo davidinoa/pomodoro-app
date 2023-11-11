@@ -24,6 +24,7 @@ module.exports = {
   plugins: ['react-refresh'],
   rules: {
     'import/no-absolute-path': 'off',
+    'react/jsx-props-no-spreading': 'off',
     'react/react-in-jsx-scope': 'off',
     'react-refresh/only-export-components': [
       'warn',

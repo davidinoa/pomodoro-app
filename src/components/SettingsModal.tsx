@@ -8,10 +8,21 @@ import {
   useDisclosure,
   Divider,
 } from '@nextui-org/react'
+import { useForm } from 'react-hook-form'
 import SettingsIcon from '../assets/icon-settings.svg?react'
+import NumberInput from './NumberInput'
+import { Settings } from '../types'
 
 export default function SettingsModal() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure()
+
+  const formMethods = useForm<Settings>({
+    defaultValues: {
+      pomodoroTime: 25,
+      shortBreakTime: 5,
+      longBreakTime: 15,
+    },
+  })
 
   return (
     <>
@@ -38,14 +49,27 @@ export default function SettingsModal() {
               <Divider />
               <ModalBody>
                 <form>
-                  <h3 className="text-center">Time (Minutes)</h3>
-
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Nullam pulvinar risus non risus hendrerit venenatis.
-                    Pellentesque sit amet hendrerit risus, sed porttitor quam.
-                  </p>
-                  <Divider />
+                  <h3 className="mb-5 text-center text-xs font-bold uppercase tracking-[4px]">
+                    Time (Minutes)
+                  </h3>
+                  <div className="flex flex-col gap-2">
+                    <NumberInput
+                      label="pomodoro"
+                      name="pomodoroTime"
+                      formMethods={formMethods}
+                    />
+                    <NumberInput
+                      label="short break"
+                      name="shortBreakTime"
+                      formMethods={formMethods}
+                    />
+                    <NumberInput
+                      label="long break"
+                      name="longBreakTime"
+                      formMethods={formMethods}
+                    />
+                  </div>
+                  <Divider className="my-6" />
                   <p>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                     Nullam pulvinar risus non risus hendrerit venenatis.
