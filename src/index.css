@@ -16,5 +16,5 @@
 
 .input-number {
   appearance: none;
-  -moz-appearance: textfield; /* Remove default arrows on Mozilla Firefox */
+  -moz-appearance: textfield;
 }

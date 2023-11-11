@@ -35,7 +35,7 @@ export default {
       themes: {
         dark: {
           colors: {
-            background: '235 35% 18%',
+            background: '#1e213f',
           },
         },
       },

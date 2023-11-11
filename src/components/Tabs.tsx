@@ -1,47 +1,33 @@
 import { Tabs, Tab, Card, CardBody } from '@nextui-org/react'
+import CountdownTimer from './CountdownTimer'
 
 export default function App() {
   return (
-    <div className="flex w-full flex-col">
-      <Tabs
-        // fullWidth
-        aria-label="Options"
-        classNames={{
-          cursor: 'dark:bg-sunset rounded-3xl',
-          tab: 'h-full p-5',
-          tabList: 'rounded-[2rem]',
-          tabContent: 'group-data-[selected=true]:text-obsidian font-bold',
-        }}
-      >
-        <Tab key="pomodoro" title="pomodoro">
-          <Card>
-            <CardBody>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.
-            </CardBody>
-          </Card>
-        </Tab>
-        <Tab key="music" title="Music">
-          <Card>
-            <CardBody>
-              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur.
-            </CardBody>
-          </Card>
-        </Tab>
-        <Tab key="videos" title="Videos">
-          <Card>
-            <CardBody>
-              Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-              officia deserunt mollit anim id est laborum.
-            </CardBody>
-          </Card>
-        </Tab>
-      </Tabs>
-    </div>
+    <Tabs
+      aria-label="Options"
+      classNames={{
+        cursor: 'dark:bg-sunset rounded-3xl',
+        tab: 'h-full py-[18px] px-[23px] rounded-[26px]',
+        tabList: 'rounded-[2rem] bg-obsidian gap-0',
+        tabContent:
+          'group-data-[selected=true]:opacity-100 group-data-[selected=true]:text-obsidian font-bold text-xs leading-none text-nimbus opacity-40 transition-all',
+      }}
+    >
+      <Tab key="pomodoro" title="pomodoro">
+        <div className="w-fit">
+          <CountdownTimer />
+        </div>
+      </Tab>
+      <Tab key="short break" title="short break">
+        <div className="w-fit">
+          <CountdownTimer />
+        </div>
+      </Tab>
+      <Tab key="long break" title="long break">
+        <div className="w-fit">
+          <CountdownTimer />
+        </div>
+      </Tab>
+    </Tabs>
   )
 }

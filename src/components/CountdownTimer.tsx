@@ -48,8 +48,6 @@ export default function CountdownTimer() {
         className="circular-progress rounded-full"
         style={{
           background: 'linear-gradient(315deg, #2E325A 0%, #0E112A 100%)',
-          boxShadow:
-            '50px 50px 100px 0px #121530, -50px -50px 100px 0px #272C5A',
         }}
       >
         <CircularProgress
