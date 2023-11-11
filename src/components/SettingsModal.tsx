@@ -62,7 +62,7 @@ export default function SettingsModal() {
           base: 'bg-white text-eclipse max-w-[326px]',
         }}
       >
-        <ModalContent>
+        <ModalContent className="overflow-y-visible">
           {(onClose) => (
             <>
               <ModalHeader className="flex flex-col gap-1 text-xl font-bold">
@@ -107,12 +107,12 @@ export default function SettingsModal() {
                   <Divider className="my-4" />
                 </form>
               </ModalBody>
-              <ModalFooter>
-                <Button color="danger" variant="light" onPress={onClose}>
-                  Close
-                </Button>
-                <Button color="primary" onPress={onClose}>
-                  Action
+              <ModalFooter className="absolute -bottom-10 left-1/2 z-50 -translate-x-1/2">
+                <Button
+                  onPress={onClose}
+                  className="inline-block h-fit rounded-3xl bg-sunset px-12 py-4 text-base leading-tight"
+                >
+                  Apply
                 </Button>
               </ModalFooter>
             </>
