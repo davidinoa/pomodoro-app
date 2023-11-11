@@ -12,6 +12,7 @@ import { useForm } from 'react-hook-form'
 import SettingsIcon from '../assets/icon-settings.svg?react'
 import NumberInput from './NumberInput'
 import { Settings } from '../types'
+import RadioGroup from './RadioGroup'
 
 export default function SettingsModal() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure()
@@ -23,6 +24,24 @@ export default function SettingsModal() {
       longBreakTime: 15,
     },
   })
+
+  const fontOptions = [
+    {
+      id: 'sans',
+      value: 'sans',
+      label: <span className="font-sans">Aa</span>,
+    },
+    {
+      id: 'serif',
+      value: 'serif',
+      label: <span className="font-serif">Aa</span>,
+    },
+    {
+      id: 'mono',
+      value: 'mono',
+      label: <span className="font-mono">Aa</span>,
+    },
+  ] as const
 
   return (
     <>
@@ -39,6 +58,9 @@ export default function SettingsModal() {
         onOpenChange={onOpenChange}
         placement="center"
         backdrop="blur"
+        classNames={{
+          base: 'bg-white text-eclipse max-w-[326px]',
+        }}
       >
         <ModalContent>
           {(onClose) => (
@@ -46,7 +68,7 @@ export default function SettingsModal() {
               <ModalHeader className="flex flex-col gap-1 text-xl font-bold">
                 <h2>Settings</h2>
               </ModalHeader>
-              <Divider />
+              <Divider className="my-4" />
               <ModalBody>
                 <form>
                   <h3 className="mb-5 text-center text-xs font-bold uppercase tracking-[4px]">
@@ -69,18 +91,20 @@ export default function SettingsModal() {
                       formMethods={formMethods}
                     />
                   </div>
-                  <Divider className="my-6" />
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Nullam pulvinar risus non risus hendrerit venenatis.
-                    Pellentesque sit amet hendrerit risus, sed porttitor quam.
-                  </p>
-                  <Divider />
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Nullam pulvinar risus non risus hendrerit venenatis.
-                    Pellentesque sit amet hendrerit risus, sed porttitor quam.
-                  </p>
+                  <Divider className="my-4" />
+                  <h3 className="mb-5 text-center text-xs font-bold uppercase tracking-[4px]">
+                    Font
+                  </h3>
+                  <RadioGroup
+                    name="font"
+                    options={fontOptions}
+                    formMethods={formMethods}
+                    classNames={{
+                      input: 'bg-whisper',
+                      labelContent: 'text-eclipse/70 peer-checked:text-white',
+                    }}
+                  />
+                  <Divider className="my-4" />
                 </form>
               </ModalBody>
               <ModalFooter>

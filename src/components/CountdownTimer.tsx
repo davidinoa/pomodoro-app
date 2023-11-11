@@ -29,15 +29,20 @@ export default function CountdownTimer() {
   }
 
   function wrapCountdownDigits(countdown: string) {
-    const wrappedCountdown = countdown
-      .split('')
-      .map((char) =>
-        /\d/.test(char) ? (
-          <span className="inline-block w-[1ch] text-center">{char}</span>
-        ) : (
-          <span className="inline-block">{char}</span>
-        ),
+    let nextId = 0
+    const wrappedCountdown = countdown.split('').map((char) => {
+      const id = nextId
+      nextId += 1
+      return /\d/.test(char) ? (
+        <span key={id} className="inline-block w-[1ch] text-center">
+          {char}
+        </span>
+      ) : (
+        <span key={id} className="inline-block">
+          {char}
+        </span>
       )
+    })
 
     return wrappedCountdown
   }

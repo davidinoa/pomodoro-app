@@ -26,6 +26,7 @@ module.exports = {
     'import/no-absolute-path': 'off',
     'react/jsx-props-no-spreading': 'off',
     'react/react-in-jsx-scope': 'off',
+    'react/require-default-props': 'off',
     'react-refresh/only-export-components': [
       'warn',
       { allowConstantExport: true },
