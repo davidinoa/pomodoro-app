@@ -25,7 +25,7 @@ export default function NumberInput({
   }
 
   function handleArrowClick(action: 'increment' | 'decrement') {
-    const inputValue = getValues(name)
+    const inputValue = Number(getValues(name))
     switch (action) {
       case 'increment':
         return setValue(name, coerceInputValue(inputValue + 1))
