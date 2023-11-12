@@ -1,15 +1,18 @@
 import { CircularProgress } from '@nextui-org/react'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useCountdown } from 'usehooks-ts'
 
 type CountdownTimerProps = {
   countStartMinutes: number
 }
 
+type Status = 'idle' | 'running' | 'paused' | 'finished'
+
 export default function CountdownTimer({
   countStartMinutes,
 }: CountdownTimerProps) {
   const countStartSeconds = countStartMinutes * 60
+  const [status, setStatus] = useState<Status>('idle')
   const [count, { startCountdown, stopCountdown, resetCountdown }] =
     useCountdown({
       countStart: countStartSeconds,
@@ -17,8 +20,7 @@ export default function CountdownTimer({
 
   useEffect(() => {
     if (count === 0) {
-      // eslint-disable-next-line no-alert
-      alert('Time is up!')
+      setStatus('finished')
     }
   }, [count])
 
@@ -49,49 +51,65 @@ export default function CountdownTimer({
     return wrappedCountdown
   }
 
+  function handleButtonClick() {
+    switch (status) {
+      case 'idle':
+        startCountdown()
+        setStatus('running')
+        break
+      case 'running':
+        stopCountdown()
+        setStatus('paused')
+        break
+      case 'paused':
+        startCountdown()
+        setStatus('running')
+        break
+      case 'finished':
+        resetCountdown()
+        setStatus('idle')
+        break
+      default:
+        throw new Error(`Invalid status: ${status}`)
+    }
+  }
+
   return (
-    <>
-      <div
-        className="circular-progress rounded-full"
-        style={{
-          background: 'linear-gradient(315deg, #2E325A 0%, #0E112A 100%)',
+    <div
+      className="circular-progress rounded-full"
+      style={{
+        background: 'linear-gradient(315deg, #2E325A 0%, #0E112A 100%)',
+      }}
+    >
+      <CircularProgress
+        aria-label="Countdown timer"
+        value={(count / countStartSeconds) * 100}
+        valueLabel={
+          <div className="relative flex min-w-[200px] flex-col items-center justify-center">
+            <time className="leading-none">
+              {wrapCountdownDigits(formatSeconds(count))}
+            </time>
+            <button
+              className="absolute -bottom-10 left-1/2 -translate-x-1/2 transform border-none bg-transparent pl-[13px] text-center uppercase tracking-[13px] text-whisper"
+              type="button"
+              onClick={handleButtonClick}
+              style={{ fontSize: 14 }}
+            >
+              {status === 'idle' && 'Start'}
+              {status === 'running' && 'Pause'}
+              {status === 'paused' && 'Resume'}
+              {status === 'finished' && 'Reset'}
+            </button>
+          </div>
+        }
+        showValueLabel
+        classNames={{
+          svg: 'w-[18.5rem] h-[18.5rem] stroke-[0.85] fill-obsidian',
+          indicator: 'stroke-sunset',
+          track: 'stroke-transparent',
+          value: 'text-[5rem] font-bold align-top',
         }}
-      >
-        <CircularProgress
-          value={(count / countStartSeconds) * 100}
-          valueLabel={
-            <div className="relative flex min-w-[200px] flex-col items-center justify-center">
-              <time className="leading-none">
-                {wrapCountdownDigits(formatSeconds(count))}
-              </time>
-              <button
-                className="absolute -bottom-7 left-1/2 -translate-x-1/2 transform border-none bg-transparent text-whisper"
-                type="button"
-                onClick={startCountdown}
-                style={{ fontSize: 14 }}
-              >
-                start
-              </button>
-            </div>
-          }
-          showValueLabel
-          classNames={{
-            svg: 'w-[18.5rem] h-[18.5rem] stroke-[0.85] fill-obsidian',
-            indicator: 'stroke-sunset',
-            track: 'stroke-transparent',
-            value: 'text-[5rem] font-bold align-top',
-          }}
-        />
-      </div>
-      <div>
-        <button type="button" onClick={stopCountdown}>
-          stop
-        </button>
-        <button type="button" onClick={resetCountdown}>
-          reset
-        </button>
-        <p>{countStartMinutes}</p>
-      </div>
-    </>
+      />
+    </div>
   )
 }
