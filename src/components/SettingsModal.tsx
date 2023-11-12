@@ -32,7 +32,10 @@ export default function SettingsModal() {
     <>
       <Button
         isIconOnly
-        onPress={onOpen}
+        onPress={() => {
+          onOpen()
+          formMethods.reset(settings)
+        }}
         variant="light"
         aria-label="Open settings modal"
       >
