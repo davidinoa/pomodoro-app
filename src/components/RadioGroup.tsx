@@ -48,7 +48,7 @@ type RadioProps = ComponentProps<'input'> & {
   children: ReactNode
 }
 
-export function Radio({ id, value, className, children }: RadioProps) {
+export function Radio({ id, value, className, style, children }: RadioProps) {
   const { name, formMethods } = useRadioGroupContext()
   const { register } = formMethods
 
@@ -59,6 +59,7 @@ export function Radio({ id, value, className, children }: RadioProps) {
         id={id}
         value={value}
         className={`peer h-10 w-10 cursor-pointer appearance-none rounded-full transition duration-200 ${className}`}
+        style={style}
         {...register(name)}
       />
       <div className="pointer-events-none absolute left-1/2 -translate-x-1/2">

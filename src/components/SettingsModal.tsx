@@ -113,7 +113,7 @@ export default function SettingsModal() {
                         key={option.id}
                         id={option.id}
                         value={option.value}
-                        className={`bg-${option.value}`}
+                        style={{ backgroundColor: option.bgColor }}
                       >
                         <span
                           className={`font-bold ${
