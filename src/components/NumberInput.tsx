@@ -49,7 +49,7 @@ export default function NumberInput({
       <span className="text-xs">{label}</span>
       <input
         type="number"
-        className="input-number w-36 rounded bg-whisper p-3 text-sm leading-none text-eclipse"
+        className="input-number w-36 rounded bg-whisper p-3 text-base leading-none text-eclipse"
         {...register(name, { valueAsNumber: true })}
         onBlur={handleBlur}
       />
@@ -57,7 +57,7 @@ export default function NumberInput({
         tabIndex={-1}
         isIconOnly
         variant="light"
-        className="absolute right-1 top-1.5 h-3 w-fit"
+        className="absolute right-1 top-1 h-4 w-fit"
         onClick={() => handleArrowClick('increment')}
       >
         <ArrowUpIcon />
@@ -66,7 +66,7 @@ export default function NumberInput({
         tabIndex={-1}
         isIconOnly
         variant="light"
-        className="absolute bottom-1.5 right-1 h-3 w-fit opacity-100 disabled:opacity-30"
+        className="absolute bottom-1 right-1 h-4 w-fit opacity-100 disabled:opacity-30"
         disabled={currentValue === 1}
         onClick={() => handleArrowClick('decrement')}
       >
