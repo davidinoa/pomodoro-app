@@ -101,7 +101,6 @@ export default function SettingsModal() {
                     options={colorOptions}
                     formMethods={formMethods}
                     classNames={{
-                      input: (value) => `bg-${value}`,
                       labelContent: 'hidden peer-checked:block font-bold',
                     }}
                   />
