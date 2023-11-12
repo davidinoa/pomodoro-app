@@ -92,6 +92,7 @@ export default function SettingsModal() {
                         className={`font-${option.value} bg-whisper checked:bg-obsidian`}
                       >
                         <span
+                          style={{ fontFamily: option.value }}
                           className={`font-bold font-${option.value} ${
                             formMethods.watch('font') === option.value
                               ? 'text-white'

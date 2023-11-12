@@ -11,7 +11,7 @@ const useAppStore = create<AppState>()((set) => ({
     pomodoroTime: 25,
     shortBreakTime: 5,
     longBreakTime: 15,
-    font: 'sans',
+    font: 'Kumbh Sans',
     color: '#f87070',
   },
   setSettings: (settings) => set({ settings }),

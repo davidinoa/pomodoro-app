@@ -90,10 +90,9 @@ export default function CountdownTimer({
               {wrapCountdownDigits(formatSeconds(count))}
             </time>
             <button
-              className="absolute -bottom-10 left-1/2 -translate-x-1/2 transform border-none bg-transparent pl-[13px] text-center uppercase tracking-[13px] text-whisper"
+              className="absolute -bottom-10 left-1/2 -translate-x-1/2 transform border-none bg-transparent pl-[13px] text-center text-sm uppercase tracking-[13px] text-whisper"
               type="button"
               onClick={handleButtonClick}
-              style={{ fontSize: 14 }}
             >
               {status === 'idle' && 'Start'}
               {status === 'running' && 'Pause'}
@@ -107,7 +106,7 @@ export default function CountdownTimer({
           svg: 'w-[18.5rem] h-[18.5rem] stroke-[0.85] fill-obsidian',
           indicator: 'stroke-theme',
           track: 'stroke-transparent',
-          value: 'text-[5rem] font-bold align-top',
+          value: 'text-[4.5rem] font-bold align-top',
         }}
       />
     </div>

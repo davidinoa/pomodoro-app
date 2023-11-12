@@ -1,15 +1,15 @@
 export const fontOptions = [
   {
     id: 'sans',
-    value: 'sans',
+    value: 'Kumbh Sans',
   },
   {
     id: 'serif',
-    value: 'serif',
+    value: 'Roboto Slab',
   },
   {
     id: 'mono',
-    value: 'mono',
+    value: 'Space Mono',
   },
 ] as const
 
