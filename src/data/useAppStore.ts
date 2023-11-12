@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import { Settings } from '../types'
+import { Settings } from '../types/types'
 
 type AppState = {
   settings: Settings
@@ -12,7 +12,7 @@ const useAppStore = create<AppState>()((set) => ({
     shortBreakTime: 5,
     longBreakTime: 15,
     font: 'sans',
-    color: 'sunset',
+    color: '#f87070',
   },
   setSettings: (settings) => set({ settings }),
 }))

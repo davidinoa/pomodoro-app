@@ -3,7 +3,7 @@ import { ComponentProps } from 'react'
 import { UseFormReturn } from 'react-hook-form'
 import ArrowUpIcon from '../assets/icon-arrow-up.svg?react'
 import ArrowDownIcon from '../assets/icon-arrow-down.svg?react'
-import { Settings } from '../types'
+import { Settings } from '../types/types'
 
 type NumberInputProps = {
   label: string

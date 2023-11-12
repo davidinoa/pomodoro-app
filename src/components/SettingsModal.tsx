@@ -11,7 +11,7 @@ import {
 import { useForm } from 'react-hook-form'
 import SettingsIcon from '../assets/icon-settings.svg?react'
 import NumberInput from './NumberInput'
-import { Settings } from '../types'
+import { Settings } from '../types/types'
 import { RadioGroup, Radio } from './RadioGroup'
 import useAppStore from '../data/useAppStore'
 import { colorOptions, fontOptions } from '../data/options'
@@ -113,7 +113,7 @@ export default function SettingsModal() {
                         key={option.id}
                         id={option.id}
                         value={option.value}
-                        style={{ backgroundColor: option.bgColor }}
+                        style={{ backgroundColor: option.value }}
                       >
                         <span
                           className={`font-bold ${
@@ -134,7 +134,8 @@ export default function SettingsModal() {
                   type="submit"
                   form="settings-form"
                   onPress={onClose}
-                  className="inline-block h-fit rounded-3xl bg-sunset px-12 py-4 text-base font-bold leading-tight data-[hover=true]:opacity-100"
+                  className="inline-block h-fit rounded-3xl bg-theme px-12 py-4 text-base font-bold leading-tight"
+                  style={{ opacity: 1 }}
                 >
                   Apply
                 </Button>

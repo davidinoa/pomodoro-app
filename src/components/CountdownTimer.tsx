@@ -105,7 +105,7 @@ export default function CountdownTimer({
         showValueLabel
         classNames={{
           svg: 'w-[18.5rem] h-[18.5rem] stroke-[0.85] fill-obsidian',
-          indicator: 'stroke-sunset',
+          indicator: 'stroke-theme',
           track: 'stroke-transparent',
           value: 'text-[5rem] font-bold align-top',
         }}

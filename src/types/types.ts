@@ -3,5 +3,5 @@ export type Settings = {
   shortBreakTime: number
   longBreakTime: number
   font: 'sans' | 'serif' | 'mono'
-  color: 'sunset' | 'glacier' | 'orchid'
+  color: string
 }

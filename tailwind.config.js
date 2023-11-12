@@ -19,6 +19,7 @@ export default {
         blizzard: '#ffffff',
         whisper: '#eff1fa',
         obsidian: '#161932',
+        theme: 'var(--theme-color)',
       },
       fontFamily: {
         sans: ['"Kumbh Sans"', ...defaultTheme.fontFamily.sans],

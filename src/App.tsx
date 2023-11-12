@@ -1,8 +1,16 @@
+import { useEffect } from 'react'
 import SettingsModal from './components/SettingsModal'
 import Tabs from './components/Tabs'
 import Logo from './assets/logo.svg?react'
+import useAppStore from './data/useAppStore'
 
 export default function App() {
+  const themeColor = useAppStore((s) => s.settings.color)
+
+  useEffect(() => {
+    document.documentElement.style.setProperty('--theme-color', themeColor)
+  }, [themeColor])
+
   return (
     <main className="flex min-h-[100svh] flex-col items-center gap-11 bg-background px-6 py-8 font-sans dark">
       <h1>

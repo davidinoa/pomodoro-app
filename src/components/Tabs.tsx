@@ -11,7 +11,7 @@ export default function Tabs() {
     <NextUiTabs
       aria-label="Options"
       classNames={{
-        cursor: 'dark:bg-sunset rounded-3xl',
+        cursor: 'dark:bg-theme rounded-3xl',
         tab: 'h-full py-[18px] px-[23px] rounded-[26px]',
         tabList: 'rounded-[2rem] bg-obsidian gap-0',
         tabContent:

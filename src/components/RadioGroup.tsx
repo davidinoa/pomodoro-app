@@ -6,7 +6,7 @@ import {
   useMemo,
 } from 'react'
 import { UseFormReturn } from 'react-hook-form'
-import { Settings } from '../types'
+import { Settings } from '../types/types'
 
 type RadioGroupContextValue = {
   name: keyof Settings
