@@ -1,62 +1,77 @@
+import {
+  ComponentProps,
+  ReactNode,
+  createContext,
+  useContext,
+  useMemo,
+} from 'react'
 import { UseFormReturn } from 'react-hook-form'
-import { ReactNode } from 'react'
 import { twMerge } from 'tailwind-merge'
 import { Settings } from '../types'
 
-type Option = {
-  id: string
-  value: string
-  label: ReactNode
-  inputBgColor?: string
+// Define the context shape
+type RadioGroupContextValue = {
+  name: keyof Settings
+  formMethods: UseFormReturn<Settings>
+}
+
+// Create the context with an initial undefined value but set the correct type
+const RadioGroupContext = createContext<RadioGroupContextValue | null>(null)
+
+// Context hook
+const useRadioGroupContext = () => {
+  const context = useContext(RadioGroupContext)
+  if (!context) {
+    throw new Error('useRadioGroupContext must be used within a RadioGroup')
+  }
+  return context
 }
 
 type RadioGroupProps = {
-  options: readonly Option[]
   name: keyof Settings
   formMethods: UseFormReturn<Settings>
-  classNames?: {
-    input?: string
-    labelContent?: string
-  }
+  children: ReactNode
 }
 
-export default function RadioGroup({
-  options,
-  name,
-  formMethods,
-  classNames = {},
-}: RadioGroupProps) {
+export function RadioGroup({ name, formMethods, children }: RadioGroupProps) {
+  const contextValue = useMemo(
+    () => ({ name, formMethods }),
+    [name, formMethods],
+  )
+
+  return (
+    <RadioGroupContext.Provider value={contextValue}>
+      <fieldset className="flex justify-center gap-4">{children}</fieldset>
+    </RadioGroupContext.Provider>
+  )
+}
+
+type RadioProps = ComponentProps<'input'> & {
+  id: string
+  value: string
+  children: ReactNode
+}
+
+// Radio component
+export function Radio({ id, value, className, children }: RadioProps) {
+  const { name, formMethods } = useRadioGroupContext()
   const { register } = formMethods
 
   return (
-    <fieldset className="flex justify-center gap-4">
-      {options.map((option) => (
-        <label
-          key={option.id}
-          htmlFor={option.id}
-          className="relative m-0 flex items-center"
-        >
-          <input
-            type="radio"
-            id={option.id}
-            value={option.value}
-            className={twMerge(
-              'peer h-10 w-10 cursor-pointer appearance-none rounded-full transition duration-200',
-              option.inputBgColor ? `bg-${option.inputBgColor}` : '',
-              classNames.input,
-            )}
-            {...register(name)}
-          />
-          <div
-            className={twMerge(
-              'pointer-events-none absolute left-1/2 -translate-x-1/2',
-              classNames.labelContent,
-            )}
-          >
-            {option.label}
-          </div>
-        </label>
-      ))}
-    </fieldset>
+    <label htmlFor={id} className="relative m-0 flex items-center">
+      <input
+        type="radio"
+        id={id}
+        value={value}
+        className={twMerge(
+          'peer h-10 w-10 cursor-pointer appearance-none rounded-full transition duration-200',
+          className,
+        )}
+        {...register(name)}
+      />
+      <div className="pointer-events-none absolute left-1/2 -translate-x-1/2">
+        {children}
+      </div>
+    </label>
   )
 }

@@ -12,20 +12,21 @@ import { useForm } from 'react-hook-form'
 import SettingsIcon from '../assets/icon-settings.svg?react'
 import NumberInput from './NumberInput'
 import { Settings } from '../types'
-import RadioGroup from './RadioGroup'
+import { RadioGroup, Radio } from './RadioGroup'
 import useAppStore from '../data/useAppStore'
 import { colorOptions, fontOptions } from '../data/options'
 
 export default function SettingsModal() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure()
-  const { settings } = useAppStore()
+  const { settings, setSettings } = useAppStore()
 
   const formMethods = useForm<Settings>({
     defaultValues: { ...settings },
   })
 
   function onSubmit(data: Settings) {
-    console.log(data)
+    // console.log(data)
+    setSettings(data)
   }
 
   return (
@@ -83,27 +84,50 @@ export default function SettingsModal() {
                   <h3 className="mb-5 text-center text-xs font-bold uppercase tracking-[4px]">
                     Font
                   </h3>
-                  <RadioGroup
-                    name="font"
-                    options={fontOptions}
-                    formMethods={formMethods}
-                    classNames={{
-                      input: 'bg-whisper checked:bg-obsidian',
-                      labelContent: 'text-eclipse/70 peer-checked:text-white',
-                    }}
-                  />
+                  <RadioGroup name="font" formMethods={formMethods}>
+                    {fontOptions.map((option) => (
+                      <Radio
+                        key={option.id}
+                        id={option.id}
+                        value={option.value}
+                        className={`font-${option.value} bg-whisper checked:bg-obsidian`}
+                      >
+                        <span
+                          className={`font-bold font-${option.value} ${
+                            formMethods.watch('font') === option.value
+                              ? 'text-white'
+                              : 'text-eclipse/70'
+                          }`}
+                        >
+                          Aa
+                        </span>
+                      </Radio>
+                    ))}
+                  </RadioGroup>
                   <Divider className="my-4 bg-gray-200" />
                   <h3 className="mb-5 text-center text-xs font-bold uppercase tracking-[4px]">
                     Color
                   </h3>
-                  <RadioGroup
-                    name="color"
-                    options={colorOptions}
-                    formMethods={formMethods}
-                    classNames={{
-                      labelContent: 'hidden peer-checked:block font-bold',
-                    }}
-                  />
+                  <RadioGroup name="color" formMethods={formMethods}>
+                    {colorOptions.map((option) => (
+                      <Radio
+                        key={option.id}
+                        id={option.id}
+                        value={option.value}
+                        className={`bg-${option.value}`}
+                      >
+                        <span
+                          className={`font-bold ${
+                            formMethods.watch('color') === option.value
+                              ? 'block'
+                              : 'hidden'
+                          }`}
+                        >
+                          ✓
+                        </span>
+                      </Radio>
+                    ))}
+                  </RadioGroup>
                 </form>
               </ModalBody>
               <ModalFooter className="absolute -bottom-10 left-1/2 z-50 -translate-x-1/2">
