@@ -22,6 +22,8 @@ export default function SettingsModal() {
       pomodoroTime: 25,
       shortBreakTime: 5,
       longBreakTime: 15,
+      font: 'sans',
+      color: 'sunset',
     },
   })
 
@@ -40,6 +42,24 @@ export default function SettingsModal() {
       id: 'mono',
       value: 'mono',
       label: <span className="font-mono">Aa</span>,
+    },
+  ] as const
+
+  const colorOptions = [
+    {
+      id: 'sunset',
+      value: 'sunset',
+      label: <span>✓</span>,
+    },
+    {
+      id: 'glacier',
+      value: 'glacier',
+      label: <span>✓</span>,
+    },
+    {
+      id: 'orchid',
+      value: 'orchid',
+      label: <span>✓</span>,
     },
   ] as const
 
@@ -68,8 +88,8 @@ export default function SettingsModal() {
               <ModalHeader className="flex flex-col gap-1 text-xl font-bold">
                 <h2>Settings</h2>
               </ModalHeader>
-              <Divider className="my-4" />
-              <ModalBody>
+              <Divider className="my-4 bg-gray-200" />
+              <ModalBody className="mb-10">
                 <form>
                   <h3 className="mb-5 text-center text-xs font-bold uppercase tracking-[4px]">
                     Time (Minutes)
@@ -91,7 +111,7 @@ export default function SettingsModal() {
                       formMethods={formMethods}
                     />
                   </div>
-                  <Divider className="my-4" />
+                  <Divider className="my-4 bg-gray-200" />
                   <h3 className="mb-5 text-center text-xs font-bold uppercase tracking-[4px]">
                     Font
                   </h3>
@@ -100,11 +120,24 @@ export default function SettingsModal() {
                     options={fontOptions}
                     formMethods={formMethods}
                     classNames={{
-                      input: 'bg-whisper',
+                      input: 'bg-whisper checked:bg-obsidian',
                       labelContent: 'text-eclipse/70 peer-checked:text-white',
                     }}
                   />
-                  <Divider className="my-4" />
+                  <Divider className="my-4 bg-gray-200" />
+                  <h3 className="mb-5 text-center text-xs font-bold uppercase tracking-[4px]">
+                    Color
+                  </h3>
+                  <RadioGroup
+                    name="color"
+                    options={colorOptions}
+                    formMethods={formMethods}
+                    classNames={{
+                      input: (value) => `bg-${value}`,
+                      labelContent:
+                        'hidden peer-checked:inline-block font-bold',
+                    }}
+                  />
                 </form>
               </ModalBody>
               <ModalFooter className="absolute -bottom-10 left-1/2 z-50 -translate-x-1/2">

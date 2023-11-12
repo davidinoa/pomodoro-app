@@ -28,7 +28,7 @@ export default function RadioGroup<T extends Option>({
   const { register } = formMethods
 
   return (
-    <fieldset className="flex justify-center space-x-4">
+    <fieldset className="flex justify-center gap-4">
       {options.map((option) => (
         <label
           key={option.id}
@@ -39,7 +39,7 @@ export default function RadioGroup<T extends Option>({
             type="radio"
             value={option.value}
             className={twMerge(
-              'peer h-10 w-10 cursor-pointer appearance-none rounded-full transition duration-200 checked:border-transparent checked:bg-obsidian',
+              'peer h-10 w-10 cursor-pointer appearance-none rounded-full transition duration-200 checked:border-transparent',
               typeof classNames.input === 'function'
                 ? classNames.input(option.value)
                 : classNames.input,
