@@ -134,7 +134,7 @@ export default function SettingsModal() {
                   type="submit"
                   form="settings-form"
                   onPress={onClose}
-                  className="inline-block h-fit rounded-3xl bg-sunset px-12 py-4 text-base leading-tight"
+                  className="inline-block h-fit rounded-3xl bg-sunset px-12 py-4 text-base font-bold leading-tight data-[hover=true]:opacity-100"
                 >
                   Apply
                 </Button>

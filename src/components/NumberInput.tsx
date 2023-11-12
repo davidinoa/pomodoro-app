@@ -19,8 +19,9 @@ export default function NumberInput({
   const { register, getValues, setValue, watch } = formMethods
   const currentValue = watch(name)
 
-  function coerceInputValue(value: number, minValue = 1) {
+  function coerceInputValue(value: number, minValue = 1, maxValue = 99) {
     if (Number.isNaN(value) || value < minValue) return minValue
+    if (value > maxValue) return maxValue
     return value
   }
 
@@ -58,6 +59,7 @@ export default function NumberInput({
         isIconOnly
         variant="light"
         className="absolute right-1 top-1 h-4 w-fit"
+        disabled={currentValue === 99}
         onClick={() => handleArrowClick('increment')}
       >
         <ArrowUpIcon />

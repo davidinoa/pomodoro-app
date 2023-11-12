@@ -2,17 +2,19 @@ import { CircularProgress } from '@nextui-org/react'
 import { useEffect } from 'react'
 import { useCountdown } from 'usehooks-ts'
 
-export default function CountdownTimer() {
+type CountdownTimerProps = {
+  countStartMinutes: number
+}
+
+export default function CountdownTimer({
+  countStartMinutes,
+}: CountdownTimerProps) {
+  const countStartSeconds = countStartMinutes * 60
   const [count, { startCountdown, stopCountdown, resetCountdown }] =
     useCountdown({
-      countStart: 5 * 60,
-      intervalMs: 1000,
+      countStart: countStartSeconds,
     })
 
-  const circularProgressValue = Math.max(
-    ((5 * 60 - count) / (5 * 60)) * 100,
-    0.1,
-  )
   useEffect(() => {
     if (count === 0) {
       // eslint-disable-next-line no-alert
@@ -56,7 +58,7 @@ export default function CountdownTimer() {
         }}
       >
         <CircularProgress
-          value={circularProgressValue}
+          value={(count / countStartSeconds) * 100}
           valueLabel={
             <div className="relative flex min-w-[200px] flex-col items-center justify-center">
               <time className="leading-none">
@@ -88,6 +90,7 @@ export default function CountdownTimer() {
         <button type="button" onClick={resetCountdown}>
           reset
         </button>
+        <p>{countStartMinutes}</p>
       </div>
     </>
   )

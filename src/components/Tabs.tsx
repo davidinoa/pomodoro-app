@@ -1,9 +1,14 @@
-import { Tabs, Tab } from '@nextui-org/react'
+import { Tabs as NextUiTabs, Tab } from '@nextui-org/react'
 import CountdownTimer from './CountdownTimer'
+import useAppStore from '../data/useAppStore'
 
-export default function App() {
+export default function Tabs() {
+  const { pomodoroTime, shortBreakTime, longBreakTime } = useAppStore(
+    (state) => state.settings,
+  )
+
   return (
-    <Tabs
+    <NextUiTabs
       aria-label="Options"
       classNames={{
         cursor: 'dark:bg-sunset rounded-3xl',
@@ -15,19 +20,25 @@ export default function App() {
     >
       <Tab key="pomodoro" title="pomodoro">
         <div className="w-fit">
-          <CountdownTimer />
+          <CountdownTimer key={pomodoroTime} countStartMinutes={pomodoroTime} />
         </div>
       </Tab>
       <Tab key="short break" title="short break">
         <div className="w-fit">
-          <CountdownTimer />
+          <CountdownTimer
+            key={shortBreakTime}
+            countStartMinutes={shortBreakTime}
+          />
         </div>
       </Tab>
       <Tab key="long break" title="long break">
         <div className="w-fit">
-          <CountdownTimer />
+          <CountdownTimer
+            key={longBreakTime}
+            countStartMinutes={longBreakTime}
+          />
         </div>
       </Tab>
-    </Tabs>
+    </NextUiTabs>
   )
 }
