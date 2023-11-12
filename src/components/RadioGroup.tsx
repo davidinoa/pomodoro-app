@@ -6,19 +6,15 @@ import {
   useMemo,
 } from 'react'
 import { UseFormReturn } from 'react-hook-form'
-import { twMerge } from 'tailwind-merge'
 import { Settings } from '../types'
 
-// Define the context shape
 type RadioGroupContextValue = {
   name: keyof Settings
   formMethods: UseFormReturn<Settings>
 }
 
-// Create the context with an initial undefined value but set the correct type
 const RadioGroupContext = createContext<RadioGroupContextValue | null>(null)
 
-// Context hook
 const useRadioGroupContext = () => {
   const context = useContext(RadioGroupContext)
   if (!context) {
@@ -52,7 +48,6 @@ type RadioProps = ComponentProps<'input'> & {
   children: ReactNode
 }
 
-// Radio component
 export function Radio({ id, value, className, children }: RadioProps) {
   const { name, formMethods } = useRadioGroupContext()
   const { register } = formMethods
@@ -63,10 +58,7 @@ export function Radio({ id, value, className, children }: RadioProps) {
         type="radio"
         id={id}
         value={value}
-        className={twMerge(
-          'peer h-10 w-10 cursor-pointer appearance-none rounded-full transition duration-200',
-          className,
-        )}
+        className={`peer h-10 w-10 cursor-pointer appearance-none rounded-full transition duration-200 ${className}`}
         {...register(name)}
       />
       <div className="pointer-events-none absolute left-1/2 -translate-x-1/2">

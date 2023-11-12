@@ -25,7 +25,6 @@ export default function SettingsModal() {
   })
 
   function onSubmit(data: Settings) {
-    // console.log(data)
     setSettings(data)
   }
 
