@@ -7,24 +7,25 @@ type Option = {
   id: string
   value: string
   label: ReactNode
+  inputBgColor?: string
 }
 
-type RadioGroupProps<TOption extends Option> = {
-  options: readonly TOption[]
+type RadioGroupProps = {
+  options: readonly Option[]
   name: keyof Settings
   formMethods: UseFormReturn<Settings>
   classNames?: {
-    input?: string | ((value: TOption['value']) => string)
+    input?: string
     labelContent?: string
   }
 }
 
-export default function RadioGroup<T extends Option>({
+export default function RadioGroup({
   options,
   name,
   formMethods,
   classNames = {},
-}: RadioGroupProps<T>) {
+}: RadioGroupProps) {
   const { register } = formMethods
 
   return (
@@ -41,9 +42,8 @@ export default function RadioGroup<T extends Option>({
             value={option.value}
             className={twMerge(
               'peer h-10 w-10 cursor-pointer appearance-none rounded-full transition duration-200',
-              typeof classNames.input === 'function'
-                ? classNames.input(option.value)
-                : classNames.input,
+              option.inputBgColor ? `bg-${option.inputBgColor}` : '',
+              classNames.input,
             )}
             {...register(name)}
           />

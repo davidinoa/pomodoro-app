@@ -21,15 +21,18 @@ export const colorOptions = [
     id: 'sunset',
     value: 'sunset',
     label: <span>✓</span>,
+    inputBgColor: 'sunset',
   },
   {
     id: 'glacier',
     value: 'glacier',
     label: <span>✓</span>,
+    inputBgColor: 'glacier',
   },
   {
     id: 'orchid',
     value: 'orchid',
     label: <span>✓</span>,
+    inputBgColor: 'orchid',
   },
 ] as const
