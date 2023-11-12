@@ -13,55 +13,20 @@ import SettingsIcon from '../assets/icon-settings.svg?react'
 import NumberInput from './NumberInput'
 import { Settings } from '../types'
 import RadioGroup from './RadioGroup'
+import useAppStore from '../data/useAppStore'
+import { colorOptions, fontOptions } from '../data/options'
 
 export default function SettingsModal() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure()
+  const { settings } = useAppStore()
 
   const formMethods = useForm<Settings>({
-    defaultValues: {
-      pomodoroTime: 25,
-      shortBreakTime: 5,
-      longBreakTime: 15,
-      font: 'sans',
-      color: 'sunset',
-    },
+    defaultValues: { ...settings },
   })
 
-  const fontOptions = [
-    {
-      id: 'sans',
-      value: 'sans',
-      label: <span className="font-sans">Aa</span>,
-    },
-    {
-      id: 'serif',
-      value: 'serif',
-      label: <span className="font-serif">Aa</span>,
-    },
-    {
-      id: 'mono',
-      value: 'mono',
-      label: <span className="font-mono">Aa</span>,
-    },
-  ] as const
-
-  const colorOptions = [
-    {
-      id: 'sunset',
-      value: 'sunset',
-      label: <span>✓</span>,
-    },
-    {
-      id: 'glacier',
-      value: 'glacier',
-      label: <span>✓</span>,
-    },
-    {
-      id: 'orchid',
-      value: 'orchid',
-      label: <span>✓</span>,
-    },
-  ] as const
+  function onSubmit(data: Settings) {
+    console.log(data)
+  }
 
   return (
     <>
@@ -90,7 +55,10 @@ export default function SettingsModal() {
               </ModalHeader>
               <Divider className="my-4 bg-gray-200" />
               <ModalBody className="mb-10">
-                <form>
+                <form
+                  id="settings-form"
+                  onSubmit={formMethods.handleSubmit(onSubmit)}
+                >
                   <h3 className="mb-5 text-center text-xs font-bold uppercase tracking-[4px]">
                     Time (Minutes)
                   </h3>
@@ -134,14 +102,15 @@ export default function SettingsModal() {
                     formMethods={formMethods}
                     classNames={{
                       input: (value) => `bg-${value}`,
-                      labelContent:
-                        'hidden peer-checked:inline-block font-bold',
+                      labelContent: 'hidden peer-checked:block font-bold',
                     }}
                   />
                 </form>
               </ModalBody>
               <ModalFooter className="absolute -bottom-10 left-1/2 z-50 -translate-x-1/2">
                 <Button
+                  type="submit"
+                  form="settings-form"
                   onPress={onClose}
                   className="inline-block h-fit rounded-3xl bg-sunset px-12 py-4 text-base leading-tight"
                 >

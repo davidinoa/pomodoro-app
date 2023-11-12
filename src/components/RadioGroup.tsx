@@ -32,14 +32,15 @@ export default function RadioGroup<T extends Option>({
       {options.map((option) => (
         <label
           key={option.id}
-          htmlFor={name}
+          htmlFor={option.id}
           className="relative m-0 flex items-center"
         >
           <input
             type="radio"
+            id={option.id}
             value={option.value}
             className={twMerge(
-              'peer h-10 w-10 cursor-pointer appearance-none rounded-full transition duration-200 checked:border-transparent',
+              'peer h-10 w-10 cursor-pointer appearance-none rounded-full transition duration-200',
               typeof classNames.input === 'function'
                 ? classNames.input(option.value)
                 : classNames.input,
