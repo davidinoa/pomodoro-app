@@ -19,8 +19,8 @@ export default function CountdownTimer({
       intervalMs: 100,
     })
 
-  const startSound = useRef(new Audio('/public/timer-start.mp3'))
-  const finishSound = useRef(new Audio('/public/timer-finish.mp3'))
+  const startSound = useRef(new Audio('/timer-start.mp3'))
+  const finishSound = useRef(new Audio('/timer-finish.mp3'))
 
   useEffect(() => {
     if (count === 0) {
@@ -72,7 +72,6 @@ export default function CountdownTimer({
         setStatus('running')
         break
       case 'finished':
-        startSound.current.play()
         resetCountdown()
         setStatus('idle')
         break
