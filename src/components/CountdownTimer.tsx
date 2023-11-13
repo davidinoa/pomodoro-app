@@ -1,5 +1,5 @@
 import { CircularProgress } from '@nextui-org/react'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useCountdown } from 'usehooks-ts'
 
 type CountdownTimerProps = {
@@ -11,22 +11,27 @@ type Status = 'idle' | 'running' | 'paused' | 'finished'
 export default function CountdownTimer({
   countStartMinutes,
 }: CountdownTimerProps) {
-  const countStartSeconds = countStartMinutes * 60
+  const countStart = countStartMinutes * 60 * 10
   const [status, setStatus] = useState<Status>('idle')
   const [count, { startCountdown, stopCountdown, resetCountdown }] =
     useCountdown({
-      countStart: countStartSeconds,
+      countStart,
+      intervalMs: 100,
     })
+
+  const startSound = useRef(new Audio('/public/timer-start.mp3'))
+  const finishSound = useRef(new Audio('/public/timer-finish.mp3'))
 
   useEffect(() => {
     if (count === 0) {
+      finishSound.current.play()
       setStatus('finished')
     }
   }, [count])
 
-  function formatSeconds(seconds: number): string {
-    const minutes = Math.floor(seconds / 60)
-    const remainingSeconds = seconds % 60
+  function formatCount(currentCount: number): string {
+    const minutes = Math.floor(currentCount / 10 / 60)
+    const remainingSeconds = Math.round(currentCount / 10) % 60
     const formattedMinutes = minutes.toString().padStart(2, '0')
     const formattedSeconds = remainingSeconds.toString().padStart(2, '0')
     return `${formattedMinutes}:${formattedSeconds}`
@@ -54,6 +59,7 @@ export default function CountdownTimer({
   function handleButtonClick() {
     switch (status) {
       case 'idle':
+        startSound.current.play()
         startCountdown()
         setStatus('running')
         break
@@ -66,6 +72,7 @@ export default function CountdownTimer({
         setStatus('running')
         break
       case 'finished':
+        startSound.current.play()
         resetCountdown()
         setStatus('idle')
         break
@@ -83,11 +90,11 @@ export default function CountdownTimer({
     >
       <CircularProgress
         aria-label="Countdown timer"
-        value={(count / countStartSeconds) * 100}
+        value={(count / countStart) * 100}
         valueLabel={
           <div className="relative flex min-w-[200px] flex-col items-center justify-center">
             <time className="leading-none">
-              {wrapCountdownDigits(formatSeconds(count))}
+              {wrapCountdownDigits(formatCount(count))}
             </time>
             <button
               className="absolute -bottom-10 left-1/2 -translate-x-1/2 transform border-none bg-transparent pl-[13px] text-center text-sm uppercase tracking-[13px] text-whisper"
