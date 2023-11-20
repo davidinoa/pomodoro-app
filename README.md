@@ -2,8 +2,8 @@
 
 [Live Site URL](https://pomodoro-app-taupe.vercel.app/)
 
-![screenshot-2](https://github.com/davidinoa/pomodoro-app/assets/31377820/3d9f0cad-7086-4766-a4ac-9c4df99800a1)
-![screenshot-1](https://github.com/davidinoa/pomodoro-app/assets/31377820/755cf9e9-9667-48a6-98a0-6d06d03efd33)
+<img src="https://github.com/davidinoa/pomodoro-app/assets/31377820/3d9f0cad-7086-4766-a4ac-9c4df99800a1" width="200" height="200">
+<img src="https://github.com/davidinoa/pomodoro-app/assets/31377820/755cf9e9-9667-48a6-98a0-6d06d03efd33" width="200" height="200">
 
 ## Overview
 
