@@ -12,10 +12,10 @@ export default function Tabs() {
       aria-label="Options"
       classNames={{
         cursor: 'dark:bg-theme rounded-3xl',
-        tab: 'h-full py-[18px] px-[23px] rounded-[26px]',
+        tab: 'h-full py-4 px-[23px] md:px-7 rounded-[28px]',
         tabList: 'rounded-[2rem] bg-obsidian gap-0',
         tabContent:
-          'group-data-[selected=true]:opacity-100 group-data-[selected=true]:text-obsidian font-bold text-xs leading-none text-nimbus opacity-40 transition-all',
+          'group-data-[selected=true]:opacity-100 group-data-[selected=true]:text-obsidian font-bold text-xs md:text-sm leading-none text-nimbus opacity-40 transition-all',
       }}
     >
       <Tab key="pomodoro" title="pomodoro">

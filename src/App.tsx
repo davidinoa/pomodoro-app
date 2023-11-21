@@ -30,11 +30,14 @@ export default function App() {
   }, [themeColor, fontFamily])
 
   return (
-    <main className="flex min-h-[100svh] flex-col items-center gap-11 bg-background px-6 py-8 dark">
+    <main className="flex min-h-[100svh] flex-col items-center gap-11 bg-background px-6 py-8 dark md:gap-14 md:p-20">
       {fontsLoaded ? (
         <>
           <h1>
-            <Logo aria-label="pomodoro app" role="img" className="m-auto h-6" />
+            <Logo
+              aria-label="Pomodoro app logo"
+              className="m-auto h-6 md:h-8"
+            />
           </h1>
           <Tabs />
           <SettingsModal />

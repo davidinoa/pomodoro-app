@@ -96,7 +96,7 @@ export default function CountdownTimer({
               {wrapCountdownDigits(formatCount(count))}
             </time>
             <button
-              className="absolute -bottom-10 left-1/2 -translate-x-1/2 transform border-none bg-transparent pl-[13px] text-center text-sm uppercase tracking-[13px] text-whisper"
+              className="absolute -bottom-10 left-1/2 -translate-x-1/2 transform border-none bg-transparent pl-[13px] text-center text-sm uppercase tracking-[13px] text-whisper md:text-base"
               type="button"
               onClick={handleButtonClick}
             >
@@ -109,10 +109,10 @@ export default function CountdownTimer({
         }
         showValueLabel
         classNames={{
-          svg: 'w-[18.5rem] h-[18.5rem] stroke-[0.85] fill-obsidian',
+          svg: 'w-[18.5rem] h-[18.5rem] md:w-[26rem] md:h-[26rem] stroke-[0.85] fill-obsidian',
           indicator: 'stroke-theme',
           track: 'stroke-transparent',
-          value: 'text-[4.5rem] font-bold align-top',
+          value: 'text-[4.5rem] md:text-[6.25rem] font-bold align-top',
         }}
       />
     </div>

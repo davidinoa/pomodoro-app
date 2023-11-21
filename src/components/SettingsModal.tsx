@@ -47,16 +47,16 @@ export default function SettingsModal() {
         placement="center"
         backdrop="blur"
         classNames={{
-          base: 'bg-white text-eclipse max-w-[326px]',
+          base: 'bg-white text-eclipse max-w-[326px] max-w-[33.75rem]',
         }}
       >
         <ModalContent className="overflow-y-visible">
           {(onClose) => (
             <>
-              <ModalHeader className="flex flex-col gap-1 text-xl font-bold">
+              <ModalHeader className="flex flex-col gap-1 text-xl font-bold md:text-2xl">
                 <h2>Settings</h2>
               </ModalHeader>
-              <Divider className="my-4 bg-gray-200" />
+              <Divider className="mb-4 bg-gray-200" />
               <ModalBody className="mb-10">
                 <form
                   id="settings-form"
@@ -65,7 +65,7 @@ export default function SettingsModal() {
                   <h3 className="mb-5 text-center text-xs font-bold uppercase tracking-[4px]">
                     Time (Minutes)
                   </h3>
-                  <div className="flex flex-col gap-2">
+                  <div className="flex flex-col gap-2 md:flex-row md:justify-center md:gap-5">
                     <NumberInput
                       label="pomodoro"
                       name="pomodoroTime"

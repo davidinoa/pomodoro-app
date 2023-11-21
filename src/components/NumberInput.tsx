@@ -45,35 +45,37 @@ export default function NumberInput({
   return (
     <label
       htmlFor="pomodoroTime"
-      className="relative flex items-center justify-between font-bold"
+      className="flex items-center justify-between font-bold md:flex-col"
     >
-      <span className="text-xs">{label}</span>
-      <input
-        type="number"
-        className="input-number w-36 rounded bg-whisper p-3 text-base leading-none text-eclipse"
-        {...register(name, { valueAsNumber: true })}
-        onBlur={handleBlur}
-      />
-      <Button
-        tabIndex={-1}
-        isIconOnly
-        variant="light"
-        className="absolute right-1 top-1 h-4 w-fit"
-        disabled={currentValue === 99}
-        onClick={() => handleArrowClick('increment')}
-      >
-        <ArrowUpIcon />
-      </Button>
-      <Button
-        tabIndex={-1}
-        isIconOnly
-        variant="light"
-        className="absolute bottom-1 right-1 h-4 w-fit opacity-100 disabled:opacity-30"
-        disabled={currentValue === 1}
-        onClick={() => handleArrowClick('decrement')}
-      >
-        <ArrowDownIcon />
-      </Button>
+      <span className="text-xs opacity-40">{label}</span>
+      <div className="relative">
+        <input
+          type="number"
+          className="input-number w-36 rounded bg-whisper p-3 text-base leading-none text-eclipse"
+          {...register(name, { valueAsNumber: true })}
+          onBlur={handleBlur}
+        />
+        <Button
+          tabIndex={-1}
+          isIconOnly
+          variant="light"
+          className="absolute right-1 top-1 h-4 w-fit opacity-100 hover:bg-purple-400 disabled:opacity-30"
+          disabled={currentValue === 99}
+          onClick={() => handleArrowClick('increment')}
+        >
+          <ArrowUpIcon />
+        </Button>
+        <Button
+          tabIndex={-1}
+          isIconOnly
+          variant="light"
+          className="absolute bottom-1 right-1 h-4 w-fit opacity-100 disabled:opacity-30"
+          disabled={currentValue === 1}
+          onClick={() => handleArrowClick('decrement')}
+        >
+          <ArrowDownIcon />
+        </Button>
+      </div>
     </label>
   )
 }
