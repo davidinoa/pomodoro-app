@@ -1,6 +1,6 @@
 # Pomodoro App
 
-[Live Site URL](https://pomodoro-app-taupe.vercel.app/)
+[Live Site URL](https://pomodoro-di.vercel.app/)
 
 <img src="https://github.com/davidinoa/pomodoro-app/assets/31377820/3d9f0cad-7086-4766-a4ac-9c4df99800a1" width="400" height="400">
 
