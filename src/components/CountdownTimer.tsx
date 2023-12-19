@@ -1,5 +1,5 @@
 import { CircularProgress } from '@nextui-org/react'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useCountdown } from 'usehooks-ts'
 
 type CountdownTimerProps = {
@@ -7,6 +7,9 @@ type CountdownTimerProps = {
 }
 
 type Status = 'idle' | 'running' | 'paused' | 'finished'
+
+const startSound = new Audio('/timer-start.mp3')
+const finishSound = new Audio('/timer-finish.mp3')
 
 export default function CountdownTimer({
   countStartMinutes,
@@ -19,12 +22,9 @@ export default function CountdownTimer({
       intervalMs: 100,
     })
 
-  const startSound = useRef(new Audio('/timer-start.mp3'))
-  const finishSound = useRef(new Audio('/timer-finish.mp3'))
-
   useEffect(() => {
     if (count === 0) {
-      finishSound.current.play()
+      finishSound.play()
       setStatus('finished')
     }
   }, [count])
@@ -59,7 +59,7 @@ export default function CountdownTimer({
   function handleButtonClick() {
     switch (status) {
       case 'idle':
-        startSound.current.play()
+        startSound.play()
         startCountdown()
         setStatus('running')
         break
