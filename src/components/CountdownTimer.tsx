@@ -10,6 +10,7 @@ type Status = 'idle' | 'running' | 'paused' | 'finished'
 
 const startSound = new Audio('/timer-start.mp3')
 const finishSound = new Audio('/timer-finish.mp3')
+const pauseSound = new Audio('/timer-pause.mp3')
 
 export default function CountdownTimer({
   countStartMinutes,
@@ -61,10 +62,12 @@ export default function CountdownTimer({
         setStatus('running')
         break
       case 'running':
+        pauseSound.play()
         stopCountdown()
         setStatus('paused')
         break
       case 'paused':
+        pauseSound.play()
         startCountdown()
         setStatus('running')
         break
