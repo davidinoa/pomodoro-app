@@ -1,3 +1,8 @@
+import {
+  ArrowUturnLeftIcon,
+  PauseIcon,
+  PlayIcon,
+} from '@heroicons/react/24/outline'
 import { CircularProgress } from '@nextui-org/react'
 import { useEffect, useState } from 'react'
 import useCountdownWorker from '../useCountdownWorker'
@@ -95,16 +100,31 @@ export default function CountdownTimer({
             <time className="leading-none">
               {wrapCountdownDigits(formatCount(count))}
             </time>
-            <button
-              className="absolute -bottom-10 left-1/2 -translate-x-1/2 transform border-none bg-transparent pl-[13px] text-center text-sm uppercase tracking-[13px] text-whisper md:text-base"
-              type="button"
-              onClick={handleButtonClick}
-            >
-              {status === 'idle' && 'Start'}
-              {status === 'running' && 'Pause'}
-              {status === 'paused' && 'Resume'}
-              {status === 'finished' && 'Reset'}
-            </button>
+            <div className="absolute -bottom-16 left-1/2 flex -translate-x-1/2 transform border-none bg-transparent pl-[13px] text-center text-sm uppercase tracking-[13px] text-whisper md:text-base">
+              {status !== 'idle' && (
+                <button
+                  type="button"
+                  aria-label="reset countdown"
+                  className={`${
+                    status === 'finished' ? '-translate-x-1/2' : '-left-4'
+                  } absolute  top-1/2 -translate-y-1/2`}
+                  onClick={() => {
+                    resetCountdown()
+                    setStatus('idle')
+                  }}
+                >
+                  <ArrowUturnLeftIcon className="h-6 w-6" />
+                </button>
+              )}
+              <button type="button" onClick={handleButtonClick}>
+                {(status === 'idle' || status === 'paused') && (
+                  <PlayIcon className="h-12 w-12 text-white" />
+                )}
+                {status === 'running' && (
+                  <PauseIcon className="h-12 w-12 text-white" />
+                )}
+              </button>
+            </div>
           </div>
         }
         showValueLabel
