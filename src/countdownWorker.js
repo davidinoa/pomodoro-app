@@ -1,47 +1,48 @@
-// countdownWorker.js
 const COUNTDOWN_INTERVAL = 1000
 let count = 0
 let intervalId = null
-let isPaused = false
 
-function startCountdown() {
-  if (intervalId) return
+function clearCountdownInterval() {
+  if (intervalId !== null) {
+    clearInterval(intervalId)
+    intervalId = null
+  }
+}
+
+function startCountdown(initialCount) {
+  if (count === 0) count = initialCount
+  if (intervalId !== null) return
+
   intervalId = setInterval(() => {
-    if (!isPaused) {
-      if (count > 0) {
-        count -= 1
-      }
+    if (count > 0) {
+      count -= 1
       postMessage(count)
-      if (count <= 0) {
-        clearInterval(intervalId)
-        intervalId = null
-      }
+    } else {
+      clearCountdownInterval()
     }
   }, COUNTDOWN_INTERVAL)
 }
 
 onmessage = (e) => {
+  if (typeof e.data.countStart !== 'number' || e.data.countStart < 0) {
+    console.error('Invalid countStart value')
+    return
+  }
+
+  const { countStart } = e.data
   switch (e.data.action) {
     case 'start':
-      if (intervalId === null) {
-        count = e.data.countStart
-        startCountdown()
-      }
-      isPaused = false
+      startCountdown(countStart)
       break
     case 'stop':
-      isPaused = true
+      clearCountdownInterval()
       break
     case 'reset':
-      count = e.data.countStart
-      isPaused = false
-      if (intervalId !== null) {
-        clearInterval(intervalId)
-        intervalId = null
-      }
-      postMessage(count)
+      clearCountdownInterval()
+      postMessage(countStart)
       break
     default:
+      console.error(`Unknown action: ${e.data.action}`)
       break
   }
 }
