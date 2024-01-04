@@ -9,7 +9,7 @@ module.exports = {
     'airbnb-typescript',
     'plugin:prettier/recommended',
   ],
-  ignorePatterns: ['dist', '.eslintrc.cjs'],
+  ignorePatterns: ['dist', '.eslintrc.cjs', 'public/*'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 'latest',
@@ -32,4 +32,15 @@ module.exports = {
       { allowConstantExport: true },
     ],
   },
+  overrides: [
+    {
+      files: ['**/*Worker.js'],
+      env: {
+        worker: true,
+      },
+      rules: {
+        'no-restricted-globals': 'off',
+      },
+    },
+  ],
 }

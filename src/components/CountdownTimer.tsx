@@ -1,6 +1,6 @@
 import { CircularProgress } from '@nextui-org/react'
 import { useEffect, useState } from 'react'
-import { useCountdown } from 'usehooks-ts'
+import useCountdownWorker from '../useCountdownWorker'
 
 type CountdownTimerProps = {
   countStartMinutes: number
@@ -14,13 +14,10 @@ const finishSound = new Audio('/timer-finish.mp3')
 export default function CountdownTimer({
   countStartMinutes,
 }: CountdownTimerProps) {
-  const countStart = countStartMinutes * 60 * 10
   const [status, setStatus] = useState<Status>('idle')
-  const [count, { startCountdown, stopCountdown, resetCountdown }] =
-    useCountdown({
-      countStart,
-      intervalMs: 100,
-    })
+  const countStart = countStartMinutes * 60
+  const { count, startCountdown, stopCountdown, resetCountdown } =
+    useCountdownWorker(countStartMinutes)
 
   useEffect(() => {
     if (count === 0) {
@@ -30,8 +27,8 @@ export default function CountdownTimer({
   }, [count])
 
   function formatCount(currentCount: number): string {
-    const minutes = Math.floor(currentCount / 10 / 60)
-    const remainingSeconds = Math.round(currentCount / 10) % 60
+    const minutes = Math.floor(currentCount / 60)
+    const remainingSeconds = Math.floor(currentCount) % 60
     const formattedMinutes = minutes.toString().padStart(2, '0')
     const formattedSeconds = remainingSeconds.toString().padStart(2, '0')
     return `${formattedMinutes}:${formattedSeconds}`
