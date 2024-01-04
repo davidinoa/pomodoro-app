@@ -38,6 +38,7 @@ onmessage = (e) => {
       clearCountdownInterval()
       break
     case 'reset':
+      count = countStart
       clearCountdownInterval()
       postMessage(countStart)
       break
