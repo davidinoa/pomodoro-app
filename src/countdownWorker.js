@@ -5,24 +5,19 @@ let intervalId = null
 let isPaused = false
 
 function startCountdown() {
-  if (intervalId === null) {
-    // Send the initial count right away
-    postMessage(count)
-
-    // Start the interval
-    intervalId = setInterval(() => {
-      if (!isPaused) {
-        if (count > 0) {
-          count -= 1
-        }
-        postMessage(count)
-        if (count <= 0) {
-          clearInterval(intervalId)
-          intervalId = null
-        }
+  if (intervalId) return
+  intervalId = setInterval(() => {
+    if (!isPaused) {
+      if (count > 0) {
+        count -= 1
       }
-    }, COUNTDOWN_INTERVAL)
-  }
+      postMessage(count)
+      if (count <= 0) {
+        clearInterval(intervalId)
+        intervalId = null
+      }
+    }
+  }, COUNTDOWN_INTERVAL)
 }
 
 onmessage = (e) => {
@@ -44,7 +39,7 @@ onmessage = (e) => {
         clearInterval(intervalId)
         intervalId = null
       }
-      postMessage(count) // Immediately post the reset count
+      postMessage(count)
       break
     default:
       break

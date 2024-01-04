@@ -1,45 +1,43 @@
 import { useEffect, useRef, useState } from 'react'
-// eslint-disable-next-line import/extensions
-import workerUrl from './countdownWorker.js?url'
+import workerUrl from './countdownWorker?url'
 
-export default function useCountdownWorker(countStartMinutes: number) {
-  const countStartSecondsRef = useRef(countStartMinutes * 60)
-  const [count, setCount] = useState(countStartSecondsRef.current)
+type Action = 'start' | 'stop' | 'reset'
+
+export default function useCountdownWorker(initialCountSeconds: number) {
+  const [count, setCount] = useState(initialCountSeconds)
   const workerRef = useRef<Worker>()
 
-  useEffect(() => {
-    const countStartSeconds = countStartSecondsRef.current
-    workerRef.current = new Worker(new URL(workerUrl, import.meta.url))
-    workerRef.current.onmessage = (e) => {
-      setCount(e.data)
+  function initializeWorker() {
+    try {
+      const url = new URL(workerUrl, import.meta.url)
+      const worker = new Worker(url)
+      worker.onmessage = (e) => setCount(e.data)
+      worker.onerror = (e) => console.error(e.message)
+      return worker
+    } catch (error) {
+      console.error(error)
+      return undefined
     }
+  }
+
+  useEffect(() => {
+    workerRef.current = initializeWorker()
     return () => {
-      workerRef.current?.postMessage({
-        action: 'reset',
-        countStart: countStartSeconds,
-      })
-      workerRef.current?.terminate()
+      if (workerRef.current) workerRef.current.terminate()
     }
   }, [])
 
-  const startCountdown = () => {
-    workerRef.current?.postMessage({
-      action: 'start',
-      countStart: countStartSecondsRef.current,
+  const sendWorkerMessage = (action: Action) => {
+    if (!workerRef.current) return console.error('Worker is not initialized')
+    return workerRef.current.postMessage({
+      action,
+      countStart: initialCountSeconds,
     })
   }
 
-  const stopCountdown = () => {
-    workerRef.current?.postMessage({ action: 'stop' })
-  }
-
-  const resetCountdown = () => {
-    workerRef.current?.postMessage({
-      action: 'reset',
-      countStart: countStartSecondsRef.current,
-    })
-    setCount(countStartSecondsRef.current)
-  }
+  const startCountdown = () => sendWorkerMessage('start')
+  const stopCountdown = () => sendWorkerMessage('stop')
+  const resetCountdown = () => sendWorkerMessage('reset')
 
   return { count, startCountdown, stopCountdown, resetCountdown }
 }

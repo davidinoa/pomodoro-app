@@ -17,7 +17,7 @@ export default function CountdownTimer({
   const [status, setStatus] = useState<Status>('idle')
   const countStart = countStartMinutes * 60
   const { count, startCountdown, stopCountdown, resetCountdown } =
-    useCountdownWorker(countStartMinutes)
+    useCountdownWorker(countStart)
 
   useEffect(() => {
     if (count === 0) {
